@@ -1,0 +1,10 @@
+webHelp*
+.idea
+uml
+temp
+# Default ignored files
+/http.iws
+# Default ignored files
+/ci-cd-github-actions-new.iws
+# Default ignored files
+/multipass.iws

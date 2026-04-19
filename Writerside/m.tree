@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="m"
+                 name="Multipass"
+                 start-page="module-01.md">
+
+    <toc-element topic="module-01.md"/>
+    <toc-element topic="module-02.md"/>
+    <toc-element topic="module-03.md"/>
+    <toc-element topic="module-04.md"/>
+    <toc-element topic="module-05.md"/>
+    <toc-element topic="module-06.md"/>
+    <toc-element topic="module-07.md"/>
+    <toc-element topic="module-08.md"/>
+    <toc-element topic="module-09.md"/>
+    <toc-element topic="module-10.md"/>
+
+</instance-profile>
