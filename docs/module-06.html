@@ -1,0 +1,144 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2026-04-20T11:58:36.987007"><title>Module 6 -- Transfert de fichiers entre h&ocirc;te et VM | Multipass</title><script type="application/json" id="virtual-toc-data">[{"id":"introduction","level":0,"title":"Introduction","anchor":"#introduction"},{"id":"objectifs-du-module","level":0,"title":"Objectifs du module","anchor":"#objectifs-du-module"},{"id":"transf-rer-des-fichiers-avec-multipass-transfer","level":0,"title":"Transférer des fichiers avec multipass transfer","anchor":"#transf-rer-des-fichiers-avec-multipass-transfer"},{"id":"montage-de-dossiers-partag-s","level":0,"title":"Montage de dossiers partagés","anchor":"#montage-de-dossiers-partag-s"},{"id":"conclusion","level":0,"title":"Conclusion","anchor":"#conclusion"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.25.3-b857/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Module 6 -- Transfert de fichiers entre h&ocirc;te et VM | Multipass"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Multipass Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/module-06.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Module 6 -- Transfert de fichiers entre h&ocirc;te et VM | Multipass"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/module-06.html#webpage",
+    "url": "writerside-documentation/module-06.html",
+    "name": "Module 6 -- Transfert de fichiers entre h&ocirc;te et VM | Multipass",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Multipass Help"
+}</script><!-- End Schema.org --></head><body data-id="module-06" data-main-title="Module 6 -- Transfert de fichiers entre hôte et VM" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Multipass  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="module-06" id="module-06.md">Module 6 -- Transfert de fichiers entre hôte et VM</h1><section class="chapter"><h2 id="introduction" data-toc="introduction">Introduction</h2><p id="m8cdqr_8">Vous savez maintenant cr&eacute;er des instances, vous y connecter et m&ecirc;me les configurer automatiquement. Mais dans un workflow de d&eacute;veloppement r&eacute;el, vous travaillez souvent sur votre machine h&ocirc;te (avec votre &eacute;diteur de code favori, vos outils graphiques, votre environnement confortable) et vous avez besoin de d&eacute;ployer ou de tester dans la VM. Il faut donc un moyen de faire transiter des fichiers entre les deux mondes.</p><p id="m8cdqr_9">Pensez &agrave; un pont entre deux &icirc;les : votre machine h&ocirc;te est une &icirc;le, votre VM en est une autre. Multipass vous propose deux types de ponts. Le premier est un ferry (<code class="code" id="m8cdqr_10">multipass transfer</code>) : vous chargez vos fichiers, vous les transportez d'un c&ocirc;t&eacute; &agrave; l'autre, et le transfert est termin&eacute;. Le second est un pont permanent (<code class="code" id="m8cdqr_11">multipass mount</code>) : un dossier de votre machine h&ocirc;te devient directement accessible depuis la VM, comme s'il existait aux deux endroits en m&ecirc;me temps.</p></section><section class="chapter"><h2 id="objectifs-du-module" data-toc="objectifs-du-module">Objectifs du module</h2><p id="m8cdqr_12">Au terme de ce module vous serez capable de :</p><ul class="list _bullet" id="m8cdqr_13"><li class="list__item" id="m8cdqr_14"><p id="m8cdqr_17">Transf&eacute;rer des fichiers de l'h&ocirc;te vers une instance et inversement</p></li><li class="list__item" id="m8cdqr_15"><p id="m8cdqr_18">Monter un dossier partag&eacute; entre l'h&ocirc;te et une instance</p></li><li class="list__item" id="m8cdqr_16"><p id="m8cdqr_19">Choisir la m&eacute;thode de partage adapt&eacute;e &agrave; votre situation</p></li></ul></section><section class="chapter"><h2 id="transf-rer-des-fichiers-avec-multipass-transfer" data-toc="transf-rer-des-fichiers-avec-multipass-transfer">Transf&eacute;rer des fichiers avec <code class="code" id="m8cdqr_24">multipass transfer</code></h2><section class="chapter"><h3 id="de-l-h-te-vers-la-vm" data-toc="de-l-h-te-vers-la-vm">De l'h&ocirc;te vers la VM</h3><p id="m8cdqr_25">La commande <code class="code" id="m8cdqr_29">multipass transfer</code> copie des fichiers d'un point &agrave; un autre. Pour envoyer un fichier depuis votre machine h&ocirc;te vers une instance :</p><div class="code-block" data-lang="bash">
+# Syntaxe générale
+multipass transfer &lt;fichier-local&gt; &lt;nom-instance&gt;:&lt;chemin&gt;
+
+# Exemple : envoyer un fichier dans le home de la VM
+multipass transfer mon-script.sh dev-server:/home/ubuntu/
+
+# Envoyer un fichier dans un autre répertoire spécifique
+multipass transfer config.json \
+  dev-server:/home/ubuntu/projet/config.json
+</div><p id="m8cdqr_27">Le format <code class="code" id="m8cdqr_30">&lt;nom-instance&gt;:&lt;chemin&gt;</code> est la convention utilis&eacute;e par Multipass pour d&eacute;signer un emplacement dans une VM. C'est la m&ecirc;me logique que la commande <code class="code" id="m8cdqr_31">scp</code> si vous connaissez SSH.</p><section class="chapter"><h4 id="exemple-transfer-vers-vm" data-toc="exemple-transfer-vers-vm">Exemple pratique</h4><p id="m8cdqr_32">Imaginons que vous avez d&eacute;velopp&eacute; un script Python sur votre machine et que vous souhaitez le tester dans une VM :</p><div class="code-block" data-lang="bash">
+# Créer un script de test sur la machine hôte
+# (le fichier existe déjà dans votre répertoire de travail)
+
+# Envoyer le script dans la VM
+multipass transfer app.py dev-server:/home/ubuntu/
+
+# Exécuter le script dans la VM
+multipass exec dev-server -- python3 /home/ubuntu/app.py
+</div></section></section><section class="chapter"><h3 id="de-la-vm-vers-l-h-te" data-toc="de-la-vm-vers-l-h-te">De la VM vers l'h&ocirc;te</h3><p id="m8cdqr_34">Le transfert fonctionne aussi dans l'autre sens. Pour r&eacute;cup&eacute;rer un fichier depuis la VM vers votre machine h&ocirc;te :</p><div class="code-block" data-lang="bash">
+# Syntaxe : source dans la VM, destination locale
+multipass transfer \
+  dev-server:/home/ubuntu/resultats.csv .
+
+# Récupérer un fichier de log
+multipass transfer \
+  dev-server:/var/log/nginx/access.log ./logs/
+</div><p id="m8cdqr_36">Le point <code class="code" id="m8cdqr_38">.</code> &agrave; la fin indique le r&eacute;pertoire courant sur votre machine h&ocirc;te.</p><section class="chapter"><h4 id="exemple-transfer-depuis-vm" data-toc="exemple-transfer-depuis-vm">Exemple pratique</h4><p id="m8cdqr_39">Vous avez g&eacute;n&eacute;r&eacute; un rapport dans la VM et vous voulez le r&eacute;cup&eacute;rer :</p><div class="code-block" data-lang="bash">
+# Générer un rapport dans la VM
+multipass exec dev-server -- bash -c &quot;
+  df -h &gt; /home/ubuntu/rapport-disque.txt
+  free -h &gt;&gt; /home/ubuntu/rapport-disque.txt
+  uptime &gt;&gt; /home/ubuntu/rapport-disque.txt
+&quot;
+
+# Récupérer le rapport
+multipass transfer \
+  dev-server:/home/ubuntu/rapport-disque.txt .
+
+# Vérifier le contenu localement
+cat rapport-disque.txt
+</div></section></section><section class="chapter"><h3 id="transferts-multiples" data-toc="transferts-multiples">Transferts multiples</h3><p id="m8cdqr_41">Vous pouvez transf&eacute;rer plusieurs fichiers en une seule commande :</p><div class="code-block" data-lang="bash">
+# Envoyer plusieurs fichiers
+multipass transfer fichier1.txt fichier2.txt \
+  dev-server:/home/ubuntu/
+
+# Récupérer plusieurs fichiers
+multipass transfer \
+  dev-server:/home/ubuntu/fichier1.txt \
+  dev-server:/home/ubuntu/fichier2.txt .
+</div><aside class="prompt" data-type="warning" data-title="" id="m8cdqr_43"><p id="m8cdqr_45">La commande <code class="code" id="m8cdqr_46">multipass transfer</code> ne g&egrave;re pas nativement les r&eacute;pertoires entiers. Pour transf&eacute;rer un dossier complet, vous pouvez le compresser en archive (tar ou zip) avant le transfert, ou utiliser le montage de dossier que nous verrons juste apr&egrave;s.</p></aside><section class="chapter"><h4 id="exemple-transfer-dossier" data-toc="exemple-transfer-dossier">Exemple pratique</h4><p id="m8cdqr_47">Voici comment contourner la limitation sur les r&eacute;pertoires en utilisant une archive :</p><div class="code-block" data-lang="bash">
+# Sur la machine hôte : compresser le dossier
+tar czf mon-projet.tar.gz mon-projet/
+
+# Envoyer l'archive
+multipass transfer mon-projet.tar.gz \
+  dev-server:/home/ubuntu/
+
+# Décompresser dans la VM
+multipass exec dev-server -- \
+  tar xzf /home/ubuntu/mon-projet.tar.gz \
+  -C /home/ubuntu/
+
+# Vérifier
+multipass exec dev-server -- ls /home/ubuntu/mon-projet/
+</div></section></section></section><section class="chapter"><h2 id="montage-de-dossiers-partag-s" data-toc="montage-de-dossiers-partag-s">Montage de dossiers partag&eacute;s</h2><section class="chapter"><h3 id="la-commande-multipass-mount" data-toc="la-commande-multipass-mount">La commande <code class="code" id="m8cdqr_59">multipass mount</code></h3><p id="m8cdqr_54">Le montage de dossier est l'alternative la plus pratique pour un travail continu. Au lieu de copier des fichiers &agrave; chaque modification, vous rendez un dossier de votre machine h&ocirc;te directement accessible depuis la VM. Toute modification faite d'un c&ocirc;t&eacute; est imm&eacute;diatement visible de l'autre.</p><div class="code-block" data-lang="bash">
+# Syntaxe générale
+multipass mount &lt;dossier-local&gt; &lt;nom-instance&gt;:&lt;point-montage&gt;
+
+# Exemple : monter le dossier &quot;projet&quot; dans la VM
+multipass mount ./projet dev-server:/home/ubuntu/projet
+</div><p id="m8cdqr_56">D&eacute;sormais, le dossier <code class="code" id="m8cdqr_60">./projet</code> de votre machine h&ocirc;te et le dossier <code class="code" id="m8cdqr_61">/home/ubuntu/projet</code> dans la VM pointent vers les m&ecirc;mes fichiers. Modifiez un fichier dans votre &eacute;diteur de code sur l'h&ocirc;te, et le changement est instantan&eacute;ment visible dans la VM.</p><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="0 0 829.234375 174"  class="flowchart" xmlns="http://www.w3.org/2000/svg" width="829.234375" id="mermaid"><g><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="8" markerWidth="8" markerUnits="userSpaceOnUse" refY="5" refX="4.5" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart-v2" id="mermaid_flowchart-v2-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart-v2" id="mermaid_flowchart-v2-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_B_0" d="M163.969,111.972L178.036,116.477C192.104,120.981,220.24,129.991,241.341,134.495C262.443,139,276.51,139,289.911,139C303.313,139,316.047,139,322.414,139L328.781,139"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" id="L_C_D_1" d="M477.266,35L491.306,35C505.346,35,533.427,35,556.025,37.75C578.623,40.5,595.739,46,612.219,51.296C628.7,56.592,644.546,61.684,652.469,64.23L660.392,66.776"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_A_C_2" d="M163.969,62.028L178.036,57.523C192.104,53.019,220.24,44.009,242.754,39.505C265.268,35,282.161,35,298.388,35C314.615,35,330.174,35,337.954,35L345.734,35"></path><path marker-end="url(#mermaid_flowchart-v2-pointEnd)" style="" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" id="L_B_D_3" d="M494.219,139L505.434,139C516.648,139,539.078,139,558.851,136.333C578.623,133.667,595.739,128.333,612.218,123.198C628.696,118.063,644.539,113.127,652.46,110.658L660.381,108.19"></path></g><g class="edgeLabels"><g transform="translate(248.375, 139)" class="edgeLabel"><g transform="translate(-59.40625, -12)" class="label"><foreignObject height="24" width="118.8125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>multipass mount</p></span></div></foreignObject></g></g><g transform="translate(561.5078125, 35)" class="edgeLabel"><g transform="translate(-42.2890625, -12)" class="label"><foreignObject height="24" width="84.578125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"><p>Synchronisé</p></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g transform="translate(0, 0)" class="label"><foreignObject height="0" width="0"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" class="labelBkg" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(85.984375, 87)" id="flowchart-A-68" class="node default"><rect height="54" width="155.96875" y="-27" x="-77.984375" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-47.984375, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="95.96875"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>Machine hôte</p></span></div></foreignObject></g></g><g transform="translate(413.5, 139)" id="flowchart-B-69" class="node default"><rect height="54" width="161.4375" y="-27" x="-80.71875" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-50.71875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="101.4375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>VM dev-server</p></span></div></foreignObject></g></g><g transform="translate(413.5, 35)" id="flowchart-C-70" class="node default"><rect height="54" width="127.53125" y="-27" x="-63.765625" data-et="node" data-id="abc" style="" class="basic label-container"></rect><g transform="translate(-33.765625, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="67.53125"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>./projet/</p></span></div></foreignObject></g></g><g transform="translate(725.015625, 87)" id="flowchart-D-71" class="node default"><polygon transform="translate(-83.21875,19.5)" class="label-container" points="-13,0 159.9375,0 179.4375,-39 6.5,-39"></polygon><g transform="translate(-75.71875, -12)" style="" class="label"><rect></rect><foreignObject height="24" width="151.4375"><div style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel"><p>home/ubuntu/projet</p></span></div></foreignObject></g></g></g></g></g></svg><section class="chapter"><h4 id="exemple-mount" data-toc="exemple-mount">Exemple pratique</h4><p id="m8cdqr_62">Voici un workflow de d&eacute;veloppement typique avec un dossier mont&eacute; :</p><div class="code-block" data-lang="bash">
+# Créer un dossier de projet sur l'hôte
+mkdir -p ~/projets/mon-app
+cd ~/projets/mon-app
+
+# Initialiser un projet
+echo '{&quot;name&quot;: &quot;mon-app&quot;}' &gt; package.json
+
+# Monter le dossier dans la VM
+multipass mount ~/projets/mon-app \
+  dev-server:/home/ubuntu/mon-app
+
+# Vérifier que le montage fonctionne
+multipass exec dev-server -- \
+  cat /home/ubuntu/mon-app/package.json
+
+# Maintenant, toute modification sur l'hôte est
+# instantanément visible dans la VM et inversement
+</div></section></section><section class="chapter"><h3 id="v-rifier-et-d-monter" data-toc="v-rifier-et-d-monter">V&eacute;rifier et d&eacute;monter</h3><p id="m8cdqr_64">Pour voir les montages actifs et les supprimer :</p><div class="code-block" data-lang="bash">
+# Voir les montages actifs d'une instance
+multipass info dev-server
+# La section &quot;Mounts&quot; affiche les dossiers montés
+
+# Démonter un dossier
+multipass umount dev-server:/home/ubuntu/projet
+
+# Démonter tous les montages d'une instance
+multipass umount dev-server
+</div></section><section class="chapter"><h3 id="transfer-vs-mount-quel-choix-faire" data-toc="transfer-vs-mount-quel-choix-faire">Transfer vs Mount : quel choix faire ?</h3><div class="table-wrapper"><table class="wide" id="m8cdqr_66"><thead><tr class="ijRowHead" id="m8cdqr_68"><th id="m8cdqr_74"><p>Crit&egrave;re</p></th><th id="m8cdqr_75"><p><code class="code" id="m8cdqr_77">transfer</code></p></th><th id="m8cdqr_76"><p><code class="code" id="m8cdqr_78">mount</code></p></th></tr></thead><tbody><tr id="m8cdqr_69"><td id="m8cdqr_79"><p>Cas d'usage</p></td><td id="m8cdqr_80"><p>Copie ponctuelle</p></td><td id="m8cdqr_81"><p>Travail continu</p></td></tr><tr id="m8cdqr_70"><td id="m8cdqr_82"><p>Synchronisation</p></td><td id="m8cdqr_83"><p>Non (copie unique)</p></td><td id="m8cdqr_84"><p>Oui (temps r&eacute;el)</p></td></tr><tr id="m8cdqr_71"><td id="m8cdqr_85"><p>Performance</p></td><td id="m8cdqr_86"><p>Rapide pour petits fichiers</p></td><td id="m8cdqr_87"><p>Variable</p></td></tr><tr id="m8cdqr_72"><td id="m8cdqr_88"><p>R&eacute;pertoires</p></td><td id="m8cdqr_89"><p>Non (archives)</p></td><td id="m8cdqr_90"><p>Oui</p></td></tr><tr id="m8cdqr_73"><td id="m8cdqr_91"><p>Persistance</p></td><td id="m8cdqr_92"><p>Copie ind&eacute;pendante</p></td><td id="m8cdqr_93"><p>Li&eacute;e au montage</p></td></tr></tbody></table></div><aside class="prompt" data-type="tip" data-title="" id="m8cdqr_67"><p id="m8cdqr_94">Privil&eacute;giez <code class="code" id="m8cdqr_95">multipass mount</code> quand vous d&eacute;veloppez activement et que vous voulez &eacute;diter sur l'h&ocirc;te tout en testant dans la VM. Utilisez <code class="code" id="m8cdqr_96">multipass transfer</code> pour des &eacute;changes ponctuels ou quand vous voulez une copie ind&eacute;pendante du fichier.</p></aside></section><section class="chapter"><h3 id="cas-d-usage-partager-un-r-pertoire-de-projet" data-toc="cas-d-usage-partager-un-r-pertoire-de-projet">Cas d'usage : partager un r&eacute;pertoire de projet</h3><p id="m8cdqr_97">Voici un sc&eacute;nario complet qui illustre le partage d'un r&eacute;pertoire de projet entre l'h&ocirc;te et la VM :</p><div class="code-block" data-lang="bash">
+# 1. Créer l'instance
+multipass launch --name dev-web \
+  --cpus 2 --memory 2G --disk 15G
+
+# 2. Installer les outils dans la VM
+multipass exec dev-web -- \
+  sudo apt update -qq
+multipass exec dev-web -- \
+  sudo apt install -y -qq python3 python3-pip
+
+# 3. Monter le dossier du projet
+multipass mount ~/projets/webapp \
+  dev-web:/home/ubuntu/webapp
+
+# 4. Travailler : éditer sur l'hôte, tester dans la VM
+# (Sur l'hôte, avec votre éditeur favori)
+# code ~/projets/webapp/app.py
+
+# (Dans la VM, lancer le serveur)
+multipass exec dev-web -- bash -c &quot;
+  cd /home/ubuntu/webapp
+  python3 app.py
+&quot;
+
+# 5. Accéder au serveur depuis l'hôte
+# (L'IP de la VM est accessible depuis l'hôte)
+multipass info dev-web | grep IPv4
+# Puis ouvrir http://&lt;ip-vm&gt;:5000 dans le navigateur
+</div><p id="m8cdqr_99">Ce workflow vous permet de b&eacute;n&eacute;ficier du meilleur des deux mondes : le confort de votre &eacute;diteur de code sur l'h&ocirc;te et l'environnement d'ex&eacute;cution isol&eacute; de la VM.</p></section></section><section class="chapter"><h2 id="conclusion" data-toc="conclusion">Conclusion</h2><p id="m8cdqr_100">Ce module vous a pr&eacute;sent&eacute; les deux m&eacute;thodes de partage de fichiers entre votre machine h&ocirc;te et vos instances Multipass. La commande <code class="code" id="m8cdqr_103">multipass transfer</code> effectue des copies ponctuelles dans les deux sens, tandis que <code class="code" id="m8cdqr_104">multipass mount</code> cr&eacute;e un lien permanent entre un dossier de l'h&ocirc;te et un point de montage dans la VM.</p><p id="m8cdqr_101">Pour un workflow de d&eacute;veloppement quotidien, le montage de dossier est g&eacute;n&eacute;ralement la solution la plus productive : vous &eacute;ditez avec vos outils habituels et testez dans la VM sans aucune &eacute;tape de copie interm&eacute;diaire.</p><p id="m8cdqr_102">Le prochain module abordera la communication r&eacute;seau entre les instances, ce qui vous permettra de cr&eacute;er des architectures distribu&eacute;es avec plusieurs VM qui collaborent.</p></section><div class="last-modified">18 avril 2026</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="module-05.html" class="navigation-links__prev">Module 5 -- Provisioning avec cloud-init</a><a href="module-07.html" class="navigation-links__next">Module 7 -- Communication r&eacute;seau entre les VM</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.25.3-b857/app.js"></script></body></html>

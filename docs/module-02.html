@@ -1,0 +1,109 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2026-04-20T11:58:36.986998"><title>Module 2 -- Installation et configuration sous Windows | Multipass</title><script type="application/json" id="virtual-toc-data">[{"id":"introduction","level":0,"title":"Introduction","anchor":"#introduction"},{"id":"objectifs-du-module","level":0,"title":"Objectifs du module","anchor":"#objectifs-du-module"},{"id":"pr-requis-syst-me","level":0,"title":"Prérequis système","anchor":"#pr-requis-syst-me"},{"id":"t-l-chargement-et-installation","level":0,"title":"Téléchargement et installation","anchor":"#t-l-chargement-et-installation"},{"id":"configuration-du-backend-hyperviseur","level":0,"title":"Configuration du backend hyperviseur","anchor":"#configuration-du-backend-hyperviseur"},{"id":"r-solution-des-probl-mes-courants","level":0,"title":"Résolution des problèmes courants","anchor":"#r-solution-des-probl-mes-courants"},{"id":"conclusion","level":0,"title":"Conclusion","anchor":"#conclusion"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.25.3-b857/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Module 2 -- Installation et configuration sous Windows | Multipass"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Multipass Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/module-02.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Module 2 -- Installation et configuration sous Windows | Multipass"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/module-02.html#webpage",
+    "url": "writerside-documentation/module-02.html",
+    "name": "Module 2 -- Installation et configuration sous Windows | Multipass",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Multipass Help"
+}</script><!-- End Schema.org --></head><body data-id="module-02" data-main-title="Module 2 -- Installation et configuration sous Windows" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Multipass  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="module-02" id="module-02.md">Module 2 -- Installation et configuration sous Windows</h1><section class="chapter"><h2 id="introduction" data-toc="introduction">Introduction</h2><p id="m89tsn_10">Vous avez maintenant une bonne vision de ce que Multipass peut faire pour vous. Mais un outil, aussi puissant soit-il, ne sert &agrave; rien s'il n'est pas correctement install&eacute; et configur&eacute;. C'est un peu comme acheter un robot de cuisine dernier cri : si vous ne le branchez pas sur la bonne prise ou si vous ne retirez pas les s&eacute;curit&eacute;s de transport, il ne fonctionnera jamais comme pr&eacute;vu.</p><p id="m89tsn_11">L'installation de Multipass sous Windows comporte quelques subtilit&eacute;s li&eacute;es &agrave; l'hyperviseur sous-jacent. Ce module vous guidera pas &agrave; pas pour que votre environnement soit op&eacute;rationnel sans accroc. Nous aborderons &eacute;galement les probl&egrave;mes les plus fr&eacute;quents et leurs solutions, pour que vous ne restiez jamais bloqu&eacute;.</p></section><section class="chapter"><h2 id="objectifs-du-module" data-toc="objectifs-du-module">Objectifs du module</h2><p id="m89tsn_12">Au terme de ce module vous serez capable de :</p><ul class="list _bullet" id="m89tsn_13"><li class="list__item" id="m89tsn_14"><p id="m89tsn_18">V&eacute;rifier que votre syst&egrave;me r&eacute;pond aux pr&eacute;requis pour Multipass</p></li><li class="list__item" id="m89tsn_15"><p id="m89tsn_19">Installer Multipass sous Windows pas &agrave; pas</p></li><li class="list__item" id="m89tsn_16"><p id="m89tsn_20">Configurer le backend hyperviseur adapt&eacute; &agrave; votre machine</p></li><li class="list__item" id="m89tsn_17"><p id="m89tsn_21">Diagnostiquer et r&eacute;soudre les probl&egrave;mes d'installation courants</p></li></ul></section><section class="chapter"><h2 id="pr-requis-syst-me" data-toc="pr-requis-syst-me">Pr&eacute;requis syst&egrave;me</h2><section class="chapter"><h3 id="l-hyperviseur-la-fondation-indispensable" data-toc="l-hyperviseur-la-fondation-indispensable">L'hyperviseur, la fondation indispensable</h3><p id="m89tsn_24">Avant d'installer Multipass, il faut s'assurer que votre machine peut faire tourner un hyperviseur. Rappelez-vous du module pr&eacute;c&eacute;dent : Multipass ne virtualise pas directement, il s'appuie sur un hyperviseur existant. Sous Windows, deux options s'offrent &agrave; vous : Hyper-V et VirtualBox.</p><p id="m89tsn_25"><span class="control" id="m89tsn_28">Hyper-V</span> est l'hyperviseur int&eacute;gr&eacute; de Microsoft. Il est disponible sur les &eacute;ditions Pro, Enterprise et Education de Windows 10 et 11. C'est l'option recommand&eacute;e car elle offre les meilleures performances et une int&eacute;gration native avec le syst&egrave;me.</p><p id="m89tsn_26"><span class="control" id="m89tsn_29">VirtualBox</span> est une alternative gratuite et open source qui fonctionne sur toutes les &eacute;ditions de Windows, y compris l'&eacute;dition Home. C'est la solution de repli si Hyper-V n'est pas disponible.</p><div class="table-wrapper"><table class="wide" id="m89tsn_27"><thead><tr class="ijRowHead" id="m89tsn_30"><th id="m89tsn_35"><p>Crit&egrave;re</p></th><th id="m89tsn_36"><p>Hyper-V</p></th><th id="m89tsn_37"><p>VirtualBox</p></th></tr></thead><tbody><tr id="m89tsn_31"><td id="m89tsn_38"><p>&Eacute;ditions Windows</p></td><td id="m89tsn_39"><p>Pro, Enterprise, Education</p></td><td id="m89tsn_40"><p>Toutes</p></td></tr><tr id="m89tsn_32"><td id="m89tsn_41"><p>Performance</p></td><td id="m89tsn_42"><p>Excellente</p></td><td id="m89tsn_43"><p>Bonne</p></td></tr><tr id="m89tsn_33"><td id="m89tsn_44"><p>Int&eacute;gration syst&egrave;me</p></td><td id="m89tsn_45"><p>Native</p></td><td id="m89tsn_46"><p>Tierce</p></td></tr><tr id="m89tsn_34"><td id="m89tsn_47"><p>Conflit avec d'autres hyperviseurs</p></td><td id="m89tsn_48"><p>Oui</p></td><td id="m89tsn_49"><p>Possible</p></td></tr></tbody></table></div></section><section class="chapter"><h3 id="v-rifier-et-activer-hyper-v" data-toc="v-rifier-et-activer-hyper-v">V&eacute;rifier et activer Hyper-V</h3><p id="m89tsn_50">Pour v&eacute;rifier si Hyper-V est disponible et l'activer, ouvrez PowerShell en tant qu'administrateur :</p><div class="code-block" data-lang="powershell">
+# Vérifier si Hyper-V est disponible
+Get-WindowsOptionalFeature -Online `
+  -FeatureName Microsoft-Hyper-V
+
+# Activer Hyper-V si disponible
+Enable-WindowsOptionalFeature -Online `
+  -FeatureName Microsoft-Hyper-V -All
+</div><p id="m89tsn_52">Apr&egrave;s activation, un red&eacute;marrage de la machine est n&eacute;cessaire.</p><p id="m89tsn_53">Vous pouvez &eacute;galement activer Hyper-V via l'interface graphique :</p><section class="procedure-steps" id="m89tsn_54"><ol class="list _decimal"><li class="list__item" id="m89tsn_56"><p>Ouvrir le Panneau de configuration</p></li><li class="list__item" id="m89tsn_57"><p>Cliquer sur &quot;Programmes et fonctionnalit&eacute;s&quot;</p></li><li class="list__item" id="m89tsn_58"><p>Cliquer sur &quot;Activer ou d&eacute;sactiver des fonctionnalit&eacute;s Windows&quot;</p></li><li class="list__item" id="m89tsn_59"><p>Cocher &quot;Hyper-V&quot; et valider</p></li><li class="list__item" id="m89tsn_60"><p>Red&eacute;marrer la machine</p></li></ol></section><section class="chapter"><h4 id="exemple-verif-hyperv" data-toc="exemple-verif-hyperv">Exemple pratique</h4><p id="m89tsn_61">Voici comment v&eacute;rifier rapidement si la virtualisation est activ&eacute;e dans le BIOS de votre machine :</p><div class="code-block" data-lang="powershell">
+# Vérifier le support de la virtualisation
+systeminfo | findstr /i &quot;hyper-v&quot;
+</div><p id="m89tsn_63">Si vous voyez &quot;Un hyperviseur a &eacute;t&eacute; d&eacute;tect&eacute;&quot;, c'est que la virtualisation mat&eacute;rielle est bien activ&eacute;e dans votre BIOS/UEFI. Dans le cas contraire, vous devrez red&eacute;marrer votre machine, entrer dans le BIOS et activer la fonctionnalit&eacute; de virtualisation (souvent nomm&eacute;e &quot;Intel VT-x&quot; ou &quot;AMD-V&quot; selon votre processeur).</p></section></section></section><section class="chapter"><h2 id="t-l-chargement-et-installation" data-toc="t-l-chargement-et-installation">T&eacute;l&eacute;chargement et installation</h2><section class="chapter"><h3 id="installer-multipass-pas-pas" data-toc="installer-multipass-pas-pas">Installer Multipass pas &agrave; pas</h3><p id="m89tsn_66">L'installation de Multipass sous Windows est directe. Le programme d'installation g&egrave;re toutes les d&eacute;pendances et la configuration initiale.</p><section class="procedure-steps" id="m89tsn_67"><ol class="list _decimal"><li class="list__item" id="m89tsn_68"><p>Rendez-vous sur le site officiel : https://multipass.run/install</p></li><li class="list__item" id="m89tsn_69"><p>T&eacute;l&eacute;chargez l'installateur Windows (.exe)</p></li><li class="list__item" id="m89tsn_70"><p>Lancez l'installateur et suivez les instructions. Lors de l'installation, choisissez le backend hyperviseur : Hyper-V (recommand&eacute;) ou VirtualBox.</p></li><li class="list__item" id="m89tsn_71"><p>Une fois l'installation termin&eacute;e, ouvrez un terminal (PowerShell ou Invite de commandes) pour v&eacute;rifier.</p></li></ol></section></section><section class="chapter"><h3 id="v-rification-de-l-installation" data-toc="v-rification-de-l-installation">V&eacute;rification de l'installation</h3><p id="m89tsn_72">Une fois Multipass install&eacute;, il est essentiel de v&eacute;rifier que tout fonctionne correctement avant d'aller plus loin. Deux commandes suffisent pour s'en assurer :</p><div class="code-block" data-lang="bash">
+# Afficher la version installée
+multipass version
+</div><p id="m89tsn_74">Le r&eacute;sultat devrait ressembler &agrave; ceci :</p><div class="code-block" data-lang="none">
+multipass   1.14.1+win
+multipassd  1.14.1+win
+</div><p id="m89tsn_76">Vous voyez deux lignes : <code class="code" id="m89tsn_81">multipass</code> est le client en ligne de commande, et <code class="code" id="m89tsn_82">multipassd</code> est le daemon (le service en arri&egrave;re-plan). Les deux doivent afficher une version.</p><div class="code-block" data-lang="bash">
+# Lister les images Ubuntu disponibles
+multipass find
+</div><p id="m89tsn_78">Cette commande affiche la liste des images Ubuntu que vous pouvez utiliser pour cr&eacute;er des VM :</p><div class="code-block" data-lang="none">
+Image           Aliases          Version
+20.04           focal            20240822
+22.04           jammy            20240829
+24.04           noble            20240830
+daily:25.04     plucky           20240901
+</div><section class="chapter"><h4 id="exemple-premier-lancement" data-toc="exemple-premier-lancement">Exemple pratique</h4><p id="m89tsn_83">Pour confirmer que tout est op&eacute;rationnel, lancez votre toute premi&egrave;re VM :</p><div class="code-block" data-lang="bash">
+# Lancer une VM de test
+multipass launch --name test-install
+
+# Vérifier qu'elle tourne
+multipass list
+
+# Se connecter rapidement
+multipass shell test-install
+
+# Une fois dans la VM, vérifier le système
+lsb_release -a
+
+# Quitter la VM
+exit
+
+# Nettoyer
+multipass delete test-install
+multipass purge
+</div><p id="m89tsn_85">Si toutes ces commandes s'ex&eacute;cutent sans erreur, votre installation est fonctionnelle.</p></section></section></section><section class="chapter"><h2 id="configuration-du-backend-hyperviseur" data-toc="configuration-du-backend-hyperviseur">Configuration du backend hyperviseur</h2><section class="chapter"><h3 id="changer-de-backend" data-toc="changer-de-backend">Changer de backend</h3><p id="m89tsn_88">Multipass permet de changer de backend hyperviseur apr&egrave;s l'installation. C'est utile si vous avez install&eacute; avec VirtualBox et que vous souhaitez passer &agrave; Hyper-V, ou inversement.</p><div class="code-block" data-lang="bash">
+# Voir le backend actuel
+multipass get local.driver
+
+# Passer à Hyper-V
+multipass set local.driver=hyperv
+
+# Ou passer à VirtualBox
+multipass set local.driver=virtualbox
+</div><aside class="prompt" data-type="warning" data-title="" id="m89tsn_90"><p id="m89tsn_91">Changer de backend n&eacute;cessite de supprimer toutes les instances existantes au pr&eacute;alable. Sauvegardez votre travail avant de proc&eacute;der.</p></aside></section><section class="chapter"><h3 id="configurer-les-ressources-par-d-faut" data-toc="configurer-les-ressources-par-d-faut">Configurer les ressources par d&eacute;faut</h3><p id="m89tsn_92">Vous pouvez &eacute;galement ajuster les ressources par d&eacute;faut attribu&eacute;es &agrave; chaque nouvelle instance :</p><div class="code-block" data-lang="bash">
+# Voir tous les paramètres configurables
+multipass get --keys
+
+# Exemples de paramètres utiles
+multipass get local.driver
+multipass get client.gui.autostart
+</div></section></section><section class="chapter"><h2 id="r-solution-des-probl-mes-courants" data-toc="r-solution-des-probl-mes-courants">R&eacute;solution des probl&egrave;mes courants</h2><section class="chapter"><h3 id="les-difficult-s-que-vous-risquez-de-rencontrer" data-toc="les-difficult-s-que-vous-risquez-de-rencontrer">Les difficult&eacute;s que vous risquez de rencontrer</h3><p id="m89tsn_98">M&ecirc;me avec la meilleure volont&eacute; du monde, l'installation peut parfois poser probl&egrave;me. Voici les situations les plus fr&eacute;quentes et leurs solutions.</p></section><section class="chapter"><h3 id="hyper-v-non-activ-ou-indisponible" data-toc="hyper-v-non-activ-ou-indisponible">Hyper-V non activ&eacute; ou indisponible</h3><p id="m89tsn_99"><span class="control" id="m89tsn_105">Sympt&ocirc;me</span>: Multipass affiche une erreur indiquant que l'hyperviseur n'est pas disponible.</p><p id="m89tsn_100"><span class="control" id="m89tsn_106">Diagnostic</span>:</p><div class="code-block" data-lang="powershell">
+# Vérifier l'état de Hyper-V
+Get-WindowsOptionalFeature -Online `
+  -FeatureName Microsoft-Hyper-V | `
+  Select-Object State
+</div><p id="m89tsn_102"><span class="control" id="m89tsn_107">Solutions</span>:</p><p id="m89tsn_103">Si l'&eacute;tat est &quot;Disabled&quot;, activez Hyper-V (voir section pr&eacute;requis). Si vous &ecirc;tes sur Windows Home, Hyper-V n'est pas disponible : basculez vers VirtualBox comme backend.</p><div class="code-block" data-lang="bash">
+multipass set local.driver=virtualbox
+</div></section><section class="chapter"><h3 id="conflit-entre-hyper-v-et-virtualbox" data-toc="conflit-entre-hyper-v-et-virtualbox">Conflit entre Hyper-V et VirtualBox</h3><p id="m89tsn_108"><span class="control" id="m89tsn_111">Sympt&ocirc;me</span>: VirtualBox ne d&eacute;marre plus apr&egrave;s l'activation de Hyper-V, ou inversement.</p><p id="m89tsn_109"><span class="control" id="m89tsn_112">Explication</span>: Hyper-V et VirtualBox (versions anciennes) ne peuvent pas coexister, car ils tentent tous deux de contr&ocirc;ler les extensions de virtualisation du processeur. Depuis VirtualBox 6.0, la coexistence est possible, mais avec des performances r&eacute;duites pour VirtualBox.</p><p id="m89tsn_110"><span class="control" id="m89tsn_113">Solution</span>: Choisissez un seul backend et tenez-vous-y. Si vous avez besoin de VirtualBox pour d'autres projets, utilisez VirtualBox comme backend Multipass &eacute;galement.</p></section><section class="chapter"><h3 id="le-daemon-multipass-ne-d-marre-pas" data-toc="le-daemon-multipass-ne-d-marre-pas">Le daemon Multipass ne d&eacute;marre pas</h3><p id="m89tsn_114"><span class="control" id="m89tsn_118">Sympt&ocirc;me</span>: Les commandes <code class="code" id="m89tsn_119">multipass</code> &eacute;chouent avec un message de connexion au daemon impossible.</p><p id="m89tsn_115"><span class="control" id="m89tsn_120">Solution</span>:</p><div class="code-block" data-lang="powershell">
+# Vérifier l'état du service
+Get-Service -Name &quot;Multipass&quot;
+
+# Redémarrer le service si nécessaire
+Restart-Service -Name &quot;Multipass&quot;
+</div><section class="chapter"><h4 id="exemple-diagnostic" data-toc="exemple-diagnostic">Exemple pratique</h4><p id="m89tsn_121">Voici une s&eacute;quence de diagnostic compl&egrave;te &agrave; ex&eacute;cuter si Multipass ne fonctionne pas apr&egrave;s l'installation :</p><div class="code-block" data-lang="powershell">
+# Étape 1 : Vérifier la version
+multipass version
+
+# Étape 2 : Vérifier le service
+Get-Service -Name &quot;Multipass&quot;
+
+# Étape 3 : Vérifier le backend
+multipass get local.driver
+
+# Étape 4 : Vérifier la virtualisation
+systeminfo | findstr /i &quot;hyper-v&quot;
+
+# Étape 5 : Consulter les logs
+# Les logs se trouvent dans :
+# C:\ProgramData\Multipass\data\logs\
+Get-Content `
+  &quot;C:\ProgramData\Multipass\data\logs\multipassd.log&quot; `
+  -Tail 50
+</div></section></section></section><section class="chapter"><h2 id="conclusion" data-toc="conclusion">Conclusion</h2><p id="m89tsn_123">Vous disposez maintenant d'un environnement Multipass fonctionnel sous Windows. Nous avons couvert l'ensemble du processus : la v&eacute;rification des pr&eacute;requis (Hyper-V ou VirtualBox), le t&eacute;l&eacute;chargement et l'installation, la v&eacute;rification avec <code class="code" id="m89tsn_125">multipass version</code> et <code class="code" id="m89tsn_126">multipass find</code>, la configuration du backend hyperviseur, et la r&eacute;solution des probl&egrave;mes les plus fr&eacute;quents.</p><p id="m89tsn_124">L'essentiel &agrave; retenir est que Multipass s'appuie sur un hyperviseur existant, et que le choix entre Hyper-V et VirtualBox d&eacute;pend de votre &eacute;dition de Windows. Une fois ce choix fait et l'installation valid&eacute;e, vous &ecirc;tes pr&ecirc;t &agrave; cr&eacute;er et g&eacute;rer vos premi&egrave;res machines virtuelles, ce que nous aborderons dans le module suivant.</p></section><div class="last-modified">18 avril 2026</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="module-01.html" class="navigation-links__prev">Module 1 -- Introduction &agrave; Multipass</a><a href="module-03.html" class="navigation-links__next">Module 3 -- Gestion du cycle de vie des VM</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.25.3-b857/app.js"></script></body></html>

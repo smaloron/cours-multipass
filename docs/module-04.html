@@ -1,0 +1,158 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2026-04-20T11:58:36.987005"><title>Module 4 -- Acc&eacute;der aux instances et travailler dedans | Multipass</title><script type="application/json" id="virtual-toc-data">[{"id":"introduction","level":0,"title":"Introduction","anchor":"#introduction"},{"id":"objectifs-du-module","level":0,"title":"Objectifs du module","anchor":"#objectifs-du-module"},{"id":"ouvrir-un-shell-interactif","level":0,"title":"Ouvrir un shell interactif","anchor":"#ouvrir-un-shell-interactif"},{"id":"ex-cuter-des-commandes-distance","level":0,"title":"Exécuter des commandes à distance","anchor":"#ex-cuter-des-commandes-distance"},{"id":"utilisateur-par-d-faut-et-gestion-des-droits","level":0,"title":"Utilisateur par défaut et gestion des droits","anchor":"#utilisateur-par-d-faut-et-gestion-des-droits"},{"id":"conclusion","level":0,"title":"Conclusion","anchor":"#conclusion"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.25.3-b857/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Module 4 -- Acc&eacute;der aux instances et travailler dedans | Multipass"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Multipass Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/module-04.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Module 4 -- Acc&eacute;der aux instances et travailler dedans | Multipass"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/module-04.html#webpage",
+    "url": "writerside-documentation/module-04.html",
+    "name": "Module 4 -- Acc&eacute;der aux instances et travailler dedans | Multipass",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Multipass Help"
+}</script><!-- End Schema.org --></head><body data-id="module-04" data-main-title="Module 4 -- Accéder aux instances et travailler dedans" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Multipass  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="module-04" id="module-04.md">Module 4 -- Accéder aux instances et travailler dedans</h1><section class="chapter"><h2 id="introduction" data-toc="introduction">Introduction</h2><p id="m8b3rp_9">Cr&eacute;er une machine virtuelle, c'est bien. Pouvoir y travailler, c'est mieux. Imaginez que vous ayez construit une maison flambant neuve mais que vous n'ayez pas encore les cl&eacute;s pour y entrer. C'est un peu la situation dans laquelle nous sommes apr&egrave;s le module pr&eacute;c&eacute;dent : nos VM existent, mais nous n'avons pas encore vu comment interagir avec elles au quotidien.</p><p id="m8b3rp_10">Multipass offre deux modes d'interaction principaux : l'ouverture d'un shell interactif (comme si vous &eacute;tiez assis devant la machine) et l'ex&eacute;cution de commandes &agrave; distance (comme si vous envoyiez des instructions par courrier). Chacun a ses avantages selon la situation, et un bon d&eacute;veloppeur sait quand utiliser l'un ou l'autre.</p></section><section class="chapter"><h2 id="objectifs-du-module" data-toc="objectifs-du-module">Objectifs du module</h2><p id="m8b3rp_11">Au terme de ce module vous serez capable de :</p><ul class="list _bullet" id="m8b3rp_12"><li class="list__item" id="m8b3rp_13"><p id="m8b3rp_16">Ouvrir un shell interactif dans une instance Multipass</p></li><li class="list__item" id="m8b3rp_14"><p id="m8b3rp_17">Ex&eacute;cuter des commandes &agrave; distance sans ouvrir de session</p></li><li class="list__item" id="m8b3rp_15"><p id="m8b3rp_18">Comprendre le fonctionnement de l'utilisateur par d&eacute;faut et la gestion des droits</p></li></ul></section><section class="chapter"><h2 id="ouvrir-un-shell-interactif" data-toc="ouvrir-un-shell-interactif">Ouvrir un shell interactif</h2><section class="chapter"><h3 id="la-commande-multipass-shell" data-toc="la-commande-multipass-shell">La commande <code class="code" id="m8b3rp_30">multipass shell</code></h3><p id="m8b3rp_21">Le moyen le plus direct d'interagir avec une instance est d'ouvrir un shell interactif. C'est l'&eacute;quivalent de se connecter en SSH &agrave; un serveur, sauf que Multipass g&egrave;re la connexion pour vous sans avoir &agrave; configurer de cl&eacute;s SSH ni &agrave; retenir de mot de passe.</p><div class="code-block" data-lang="bash">
+# Ouvrir un shell dans l'instance &quot;dev-server&quot;
+multipass shell dev-server
+</div><p id="m8b3rp_23">Une fois cette commande ex&eacute;cut&eacute;e, votre invite de commande change pour indiquer que vous &ecirc;tes d&eacute;sormais dans la VM :</p><div class="code-block" data-lang="none">
+ubuntu@dev-server:~$
+</div><p id="m8b3rp_25">Vous &ecirc;tes maintenant dans un environnement Ubuntu complet. Vous pouvez y ex&eacute;cuter toutes les commandes Linux que vous connaissez :</p><div class="code-block" data-lang="bash">
+# Vérifier la version d'Ubuntu
+lsb_release -a
+
+# Voir l'espace disque
+df -h
+
+# Voir la mémoire disponible
+free -h
+
+# Mettre à jour les paquets
+sudo apt update &amp;&amp; sudo apt upgrade -y
+</div><p id="m8b3rp_27">Pour quitter le shell et revenir &agrave; votre machine h&ocirc;te, tapez simplement <code class="code" id="m8b3rp_31">exit</code> ou utilisez le raccourci <code class="code" id="m8b3rp_32">Ctrl+D</code>.</p><div class="code-block" data-lang="bash">
+# Quitter le shell de la VM
+exit
+</div><section class="chapter"><h4 id="exemple-shell-interactif" data-toc="exemple-shell-interactif">Exemple pratique</h4><p id="m8b3rp_33">Voici un sc&eacute;nario typique d'utilisation du shell interactif pour pr&eacute;parer un environnement de d&eacute;veloppement Python :</p><div class="code-block" data-lang="bash">
+# Depuis la machine hôte, ouvrir un shell
+multipass shell dev-server
+
+# Dans la VM : installer Python et pip
+sudo apt update
+sudo apt install -y python3 python3-pip python3-venv
+
+# Créer un environnement virtuel
+python3 -m venv ~/mon-projet/venv
+source ~/mon-projet/venv/bin/activate
+
+# Installer des dépendances
+pip install flask requests
+
+# Vérifier l'installation
+python3 -c &quot;import flask; print(flask.__version__)&quot;
+
+# Quitter la VM
+exit
+</div><p id="m8b3rp_35">Le shell interactif est id&eacute;al pour les t&acirc;ches exploratoires : quand vous avez besoin de naviguer dans le syst&egrave;me de fichiers, de d&eacute;boguer un probl&egrave;me, ou de tester des commandes de mani&egrave;re it&eacute;rative.</p></section></section></section><section class="chapter"><h2 id="ex-cuter-des-commandes-distance" data-toc="ex-cuter-des-commandes-distance">Ex&eacute;cuter des commandes &agrave; distance</h2><section class="chapter"><h3 id="la-commande-multipass-exec" data-toc="la-commande-multipass-exec">La commande <code class="code" id="m8b3rp_45">multipass exec</code></h3><p id="m8b3rp_39">Parfois, vous n'avez pas besoin d'ouvrir une session interactive compl&egrave;te. Vous voulez simplement ex&eacute;cuter une commande et r&eacute;cup&eacute;rer le r&eacute;sultat. C'est comme envoyer un SMS au lieu de passer un appel t&eacute;l&eacute;phonique : c'est plus rapide et plus direct quand le message est simple.</p><p id="m8b3rp_40">La commande <code class="code" id="m8b3rp_46">multipass exec</code> permet d'ex&eacute;cuter une commande dans une instance sans ouvrir de session :</p><div class="code-block" data-lang="bash">
+# Syntaxe générale
+multipass exec &lt;nom-instance&gt; -- &lt;commande&gt;
+</div><p id="m8b3rp_42">Le double tiret <code class="code" id="m8b3rp_47">--</code> s&eacute;pare les arguments de <code class="code" id="m8b3rp_48">multipass exec</code> de la commande &agrave; ex&eacute;cuter dans la VM. C'est une convention courante dans les outils en ligne de commande.</p><div class="code-block" data-lang="bash">
+# Vérifier l'espace disque dans la VM
+multipass exec dev-server -- df -h
+
+# Lister le contenu du répertoire home
+multipass exec dev-server -- ls -la /home/ubuntu
+
+# Voir les processus en cours
+multipass exec dev-server -- ps aux
+</div><section class="chapter"><h4 id="exemple-exec-simple" data-toc="exemple-exec-simple">Exemple pratique</h4><p id="m8b3rp_49"><code class="code" id="m8b3rp_51">multipass exec</code> est particuli&egrave;rement utile pour les v&eacute;rifications rapides et l'automatisation :</p><div class="code-block" data-lang="bash">
+# Vérifier si un service est installé
+multipass exec dev-server -- which nginx
+
+# Installer un paquet sans ouvrir de session
+multipass exec dev-server -- \
+  sudo apt install -y nginx
+
+# Vérifier que le service tourne
+multipass exec dev-server -- \
+  systemctl status nginx
+
+# Récupérer l'adresse IP depuis la VM
+multipass exec dev-server -- \
+  hostname -I
+</div></section></section><section class="chapter"><h3 id="ex-cuter-des-commandes-complexes" data-toc="ex-cuter-des-commandes-complexes">Ex&eacute;cuter des commandes complexes</h3><p id="m8b3rp_52">Pour les commandes plus longues ou celles qui contiennent des caract&egrave;res sp&eacute;ciaux (pipes, redirections), il est pr&eacute;f&eacute;rable d'encapsuler la commande dans <code class="code" id="m8b3rp_56">bash -c</code>:</p><div class="code-block" data-lang="bash">
+# Commande avec pipe
+multipass exec dev-server -- \
+  bash -c &quot;ps aux | grep nginx&quot;
+
+# Commande avec redirection
+multipass exec dev-server -- \
+  bash -c &quot;echo 'Hello VM' &gt; /tmp/test.txt&quot;
+
+# Commande multiligne
+multipass exec dev-server -- bash -c &quot;
+  cd /home/ubuntu
+  mkdir -p mon-projet
+  echo 'Projet initialisé' &gt; mon-projet/README.md
+  cat mon-projet/README.md
+&quot;
+</div><aside class="prompt" data-type="tip" data-title="" id="m8b3rp_54"><p id="m8b3rp_57">Utilisez <code class="code" id="m8b3rp_58">multipass exec</code> pour les op&eacute;rations ponctuelles et les scripts automatis&eacute;s. R&eacute;servez <code class="code" id="m8b3rp_59">multipass shell</code> pour les sessions de travail interactives ou le d&eacute;bogage.</p></aside><section class="chapter"><h4 id="exemple-exec-avance" data-toc="exemple-exec-avance">Exemple pratique</h4><p id="m8b3rp_60">Voici comment utiliser <code class="code" id="m8b3rp_63">multipass exec</code> dans un petit script d'automatisation sur votre machine h&ocirc;te :</p><div class="code-block" data-lang="bash">
+#!/bin/bash
+# Script : setup-dev-env.sh
+# Configure une instance pour le développement
+
+VM_NAME=&quot;dev-server&quot;
+
+echo &quot;Mise à jour du système...&quot;
+multipass exec $VM_NAME -- \
+  sudo apt update -qq
+
+echo &quot;Installation de Git...&quot;
+multipass exec $VM_NAME -- \
+  sudo apt install -y -qq git
+
+echo &quot;Installation de Node.js...&quot;
+multipass exec $VM_NAME -- \
+  sudo snap install node --classic
+
+echo &quot;Vérification des installations...&quot;
+multipass exec $VM_NAME -- git --version
+multipass exec $VM_NAME -- node --version
+multipass exec $VM_NAME -- npm --version
+
+echo &quot;Environnement prêt.&quot;
+</div><p id="m8b3rp_62">Ce type de script peut &ecirc;tre lanc&eacute; depuis votre machine h&ocirc;te pour configurer automatiquement une instance fra&icirc;chement cr&eacute;&eacute;e.</p></section></section></section><section class="chapter"><h2 id="utilisateur-par-d-faut-et-gestion-des-droits" data-toc="utilisateur-par-d-faut-et-gestion-des-droits">Utilisateur par d&eacute;faut et gestion des droits</h2><section class="chapter"><h3 id="l-utilisateur-ubuntu" data-toc="l-utilisateur-ubuntu">L'utilisateur <code class="code" id="m8b3rp_70">ubuntu</code></h3><p id="m8b3rp_67">Lorsque vous vous connectez &agrave; une instance Multipass, vous &ecirc;tes automatiquement connect&eacute; en tant qu'utilisateur <code class="code" id="m8b3rp_71">ubuntu</code>. Cet utilisateur est cr&eacute;&eacute; par d&eacute;faut lors de la cr&eacute;ation de l'instance et dispose de droits <code class="code" id="m8b3rp_72">sudo</code> sans mot de passe.</p><div class="code-block" data-lang="bash">
+# Vérifier l'utilisateur courant
+multipass exec dev-server -- whoami
+# Résultat : ubuntu
+
+# Vérifier les groupes de l'utilisateur
+multipass exec dev-server -- groups
+# Résultat : ubuntu adm cdrom sudo dip plugdev
+</div><p id="m8b3rp_69">L'appartenance au groupe <code class="code" id="m8b3rp_73">sudo</code> signifie que l'utilisateur <code class="code" id="m8b3rp_74">ubuntu</code> peut ex&eacute;cuter n'importe quelle commande en tant que root en pr&eacute;fixant avec <code class="code" id="m8b3rp_75">sudo</code>, sans saisir de mot de passe.</p></section><section class="chapter"><h3 id="utiliser-sudo" data-toc="utiliser-sudo">Utiliser sudo</h3><p id="m8b3rp_76">&Eacute;tant donn&eacute; que l'utilisateur <code class="code" id="m8b3rp_79">ubuntu</code> a un acc&egrave;s <code class="code" id="m8b3rp_80">sudo</code> sans mot de passe, l'&eacute;l&eacute;vation de privil&egrave;ges est transparente :</p><div class="code-block" data-lang="bash">
+# Installer un paquet (nécessite les droits root)
+multipass exec dev-server -- \
+  sudo apt install -y curl wget
+
+# Modifier un fichier système
+multipass exec dev-server -- \
+  sudo bash -c &quot;echo '127.0.0.1 monapp.local' \
+    &gt;&gt; /etc/hosts&quot;
+
+# Redémarrer un service
+multipass exec dev-server -- \
+  sudo systemctl restart nginx
+</div><section class="chapter"><h4 id="exemple-droits" data-toc="exemple-droits">Exemple pratique</h4><p id="m8b3rp_81">Voici comment configurer un utilisateur suppl&eacute;mentaire dans une instance, ce qui peut &ecirc;tre utile pour simuler un environnement multi-utilisateurs :</p><div class="code-block" data-lang="bash">
+# Créer un nouvel utilisateur
+multipass exec dev-server -- \
+  sudo adduser --disabled-password \
+  --gecos &quot;&quot; developpeur
+
+# Lui donner les droits sudo
+multipass exec dev-server -- \
+  sudo usermod -aG sudo developpeur
+
+# Exécuter une commande en tant que cet utilisateur
+multipass exec dev-server -- \
+  sudo -u developpeur whoami
+</div><aside class="prompt" data-type="note" data-title="" id="m8b3rp_83"><p id="m8b3rp_84">Dans la plupart des cas d'utilisation de Multipass, l'utilisateur <code class="code" id="m8b3rp_85">ubuntu</code> par d&eacute;faut suffit amplement. La cr&eacute;ation d'utilisateurs suppl&eacute;mentaires n'est n&eacute;cessaire que dans des sc&eacute;narios sp&eacute;cifiques comme la simulation d'environnements multi-utilisateurs ou le test de permissions.</p></aside></section></section></section><section class="chapter"><h2 id="conclusion" data-toc="conclusion">Conclusion</h2><p id="m8b3rp_86">Ce module vous a pr&eacute;sent&eacute; les deux modes d'interaction principaux avec les instances Multipass : le shell interactif avec <code class="code" id="m8b3rp_89">multipass shell</code> et l'ex&eacute;cution de commandes &agrave; distance avec <code class="code" id="m8b3rp_90">multipass exec</code>. Vous avez &eacute;galement d&eacute;couvert le fonctionnement de l'utilisateur par d&eacute;faut <code class="code" id="m8b3rp_91">ubuntu</code> et sa capacit&eacute; &agrave; utiliser <code class="code" id="m8b3rp_92">sudo</code> sans mot de passe.</p><p id="m8b3rp_87">La r&egrave;gle d'or est simple : utilisez <code class="code" id="m8b3rp_93">multipass shell</code> quand vous avez besoin d'explorer, de d&eacute;boguer ou de travailler de mani&egrave;re interactive, et <code class="code" id="m8b3rp_94">multipass exec</code> quand vous devez ex&eacute;cuter des commandes pr&eacute;cises ou automatiser des t&acirc;ches.</p><p id="m8b3rp_88">Le prochain module abordera un sujet passionnant : le provisioning automatique avec cloud-init, qui vous permettra de configurer vos instances automatiquement d&egrave;s leur cr&eacute;ation.</p></section><div class="last-modified">18 avril 2026</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="module-03.html" class="navigation-links__prev">Module 3 -- Gestion du cycle de vie des VM</a><a href="module-05.html" class="navigation-links__next">Module 5 -- Provisioning avec cloud-init</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.25.3-b857/app.js"></script></body></html>

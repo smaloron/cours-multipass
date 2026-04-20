@@ -1,0 +1,200 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2026-04-20T11:58:36.986998"><title>Module 8 -- Installation et utilisation de Docker dans une VM | Multipass</title><script type="application/json" id="virtual-toc-data">[{"id":"introduction","level":0,"title":"Introduction","anchor":"#introduction"},{"id":"objectifs-du-module","level":0,"title":"Objectifs du module","anchor":"#objectifs-du-module"},{"id":"pourquoi-docker-dans-multipass","level":0,"title":"Pourquoi Docker dans Multipass ?","anchor":"#pourquoi-docker-dans-multipass"},{"id":"installation-manuelle-de-docker","level":0,"title":"Installation manuelle de Docker","anchor":"#installation-manuelle-de-docker"},{"id":"installation-automatis-e-via-cloud-init","level":0,"title":"Installation automatisée via cloud-init","anchor":"#installation-automatis-e-via-cloud-init"},{"id":"image-docker-optimis-e-de-multipass","level":0,"title":"Image Docker optimisée de Multipass","anchor":"#image-docker-optimis-e-de-multipass"},{"id":"gestion-des-permissions-docker","level":0,"title":"Gestion des permissions Docker","anchor":"#gestion-des-permissions-docker"},{"id":"conclusion","level":0,"title":"Conclusion","anchor":"#conclusion"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.25.3-b857/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Module 8 -- Installation et utilisation de Docker dans une VM | Multipass"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Multipass Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/module-08.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Module 8 -- Installation et utilisation de Docker dans une VM | Multipass"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/module-08.html#webpage",
+    "url": "writerside-documentation/module-08.html",
+    "name": "Module 8 -- Installation et utilisation de Docker dans une VM | Multipass",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Multipass Help"
+}</script><!-- End Schema.org --></head><body data-id="module-08" data-main-title="Module 8 -- Installation et utilisation de Docker dans une VM" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Multipass  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="module-08" id="module-08.md">Module 8 -- Installation et utilisation de Docker dans une VM</h1><section class="chapter"><h2 id="introduction" data-toc="introduction">Introduction</h2><p id="m8dnpt_11">Vous ma&icirc;trisez maintenant la cr&eacute;ation et la gestion de machines virtuelles avec Multipass. Il est temps d'aller plus loin en combinant deux technologies compl&eacute;mentaires : la virtualisation (Multipass) et la conteneurisation (Docker). Pourquoi utiliser Docker dans une VM alors que Docker peut tourner directement sur votre machine ? La r&eacute;ponse tient en un mot : isolation.</p><p id="m8dnpt_12">Pensez &agrave; un laboratoire de chimie. Vous pourriez faire vos exp&eacute;riences directement dans la cuisine (Docker sur votre machine), mais un laboratoire d&eacute;di&eacute; (Docker dans une VM) vous offre un espace contr&ocirc;l&eacute;, reproductible et sans risque pour le reste de la maison. De plus, sous Windows, utiliser Docker dans une VM Multipass est une alternative gratuite et l&eacute;g&egrave;re &agrave; Docker Desktop, qui n&eacute;cessite une licence commerciale pour les entreprises de plus de 250 employ&eacute;s.</p></section><section class="chapter"><h2 id="objectifs-du-module" data-toc="objectifs-du-module">Objectifs du module</h2><p id="m8dnpt_13">Au terme de ce module vous serez capable de :</p><ul class="list _bullet" id="m8dnpt_14"><li class="list__item" id="m8dnpt_15"><p id="m8dnpt_20">Expliquer l'int&eacute;r&ecirc;t d'utiliser Docker dans une VM Multipass</p></li><li class="list__item" id="m8dnpt_16"><p id="m8dnpt_21">Installer Docker manuellement dans une instance</p></li><li class="list__item" id="m8dnpt_17"><p id="m8dnpt_22">Automatiser l'installation de Docker via cloud-init</p></li><li class="list__item" id="m8dnpt_18"><p id="m8dnpt_23">Utiliser l'image Docker optimis&eacute;e de Multipass</p></li><li class="list__item" id="m8dnpt_19"><p id="m8dnpt_24">G&eacute;rer les permissions Docker dans l'instance</p></li></ul></section><section class="chapter"><h2 id="pourquoi-docker-dans-multipass" data-toc="pourquoi-docker-dans-multipass">Pourquoi Docker dans Multipass ?</h2><section class="chapter"><h3 id="les-avantages-de-cette-combinaison" data-toc="les-avantages-de-cette-combinaison">Les avantages de cette combinaison</h3><p id="m8dnpt_26">L'utilisation de Docker dans une VM Multipass pr&eacute;sente plusieurs avantages concrets :</p><p id="m8dnpt_27"><span class="control" id="m8dnpt_31">Isolation compl&egrave;te</span>: Docker partage le noyau de l'h&ocirc;te. Si un conteneur exploite une faille du noyau, votre syst&egrave;me h&ocirc;te est potentiellement compromis. Dans une VM, le conteneur est doublement isol&eacute; : par le moteur Docker et par l'hyperviseur.</p><p id="m8dnpt_28"><span class="control" id="m8dnpt_32">Reproductibilit&eacute;</span>: avec cloud-init, vous pouvez cr&eacute;er en une commande une VM avec Docker pr&eacute;configur&eacute;, pr&ecirc;te &agrave; l'emploi. Partagez le fichier YAML avec votre &eacute;quipe et tout le monde dispose du m&ecirc;me environnement.</p><p id="m8dnpt_29"><span class="control" id="m8dnpt_33">Alternative &agrave; Docker Desktop</span>: sous Windows, Docker Desktop n&eacute;cessite une licence payante pour un usage commercial dans les grandes entreprises. Docker dans une VM Multipass est enti&egrave;rement gratuit.</p><p id="m8dnpt_30"><span class="control" id="m8dnpt_34">Environnement jetable</span>: si vos exp&eacute;riences Docker tournent mal (images corrompues, volumes encombrants, configuration cass&eacute;e), vous d&eacute;truisez la VM et en recr&eacute;ez une. Votre machine h&ocirc;te reste intacte.</p></section></section><section class="chapter"><h2 id="installation-manuelle-de-docker" data-toc="installation-manuelle-de-docker">Installation manuelle de Docker</h2><section class="chapter"><h3 id="proc-dure-pas-pas" data-toc="proc-dure-pas-pas">Proc&eacute;dure pas &agrave; pas</h3><p id="m8dnpt_37">Commencez par cr&eacute;er une instance avec suffisamment de ressources pour Docker :</p><div class="code-block" data-lang="bash">
+# Créer une instance adaptée à Docker
+multipass launch --name docker-vm \
+  --cpus 2 --memory 4G --disk 20G
+</div><p id="m8dnpt_39">Puis connectez-vous et installez Docker :</p><div class="code-block" data-lang="bash">
+# Se connecter à l'instance
+multipass shell docker-vm
+</div><p id="m8dnpt_41">Dans la VM, ex&eacute;cutez les commandes suivantes :</p><div class="code-block" data-lang="bash">
+# Mettre à jour les paquets
+sudo apt update
+
+# Installer les prérequis
+sudo apt install -y \
+  ca-certificates \
+  curl \
+  gnupg \
+  lsb-release
+
+# Ajouter la clé GPG officielle de Docker
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  | sudo gpg --dearmor \
+  -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Ajouter le dépôt Docker
+echo \
+  &quot;deb [arch=$(dpkg --print-architecture) \
+  signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;) \
+  stable&quot; | \
+  sudo tee /etc/apt/sources.list.d/docker.list \
+  &gt; /dev/null
+
+# Installer Docker
+sudo apt update
+sudo apt install -y \
+  docker-ce \
+  docker-ce-cli \
+  containerd.io \
+  docker-compose-plugin
+</div></section><section class="chapter"><h3 id="v-rification-de-l-installation" data-toc="v-rification-de-l-installation">V&eacute;rification de l'installation</h3><p id="m8dnpt_43">Toujours dans la VM, v&eacute;rifiez que Docker fonctionne :</p><div class="code-block" data-lang="bash">
+# Vérifier la version de Docker
+sudo docker version
+
+# Lancer le conteneur de test
+sudo docker run hello-world
+</div><p id="m8dnpt_45">Si vous voyez le message &quot;Hello from Docker!&quot;, l'installation est r&eacute;ussie.</p><section class="chapter"><h4 id="exemple-verif-docker" data-toc="exemple-verif-docker">Exemple pratique</h4><p id="m8dnpt_47">Voici une s&eacute;rie de v&eacute;rifications pour confirmer que Docker est pleinement op&eacute;rationnel :</p><div class="code-block" data-lang="bash">
+# Vérifier que le service Docker tourne
+sudo systemctl status docker --no-pager
+
+# Vérifier la version complète
+sudo docker info | head -20
+
+# Lancer un conteneur interactif Ubuntu
+sudo docker run -it --rm ubuntu:24.04 bash -c \
+  &quot;echo 'Docker fonctionne dans la VM !'&quot;
+
+# Lancer un serveur web temporaire
+sudo docker run -d -p 8080:80 --name test-nginx nginx
+curl http://localhost:8080
+sudo docker rm -f test-nginx
+</div></section></section></section><section class="chapter"><h2 id="installation-automatis-e-via-cloud-init" data-toc="installation-automatis-e-via-cloud-init">Installation automatis&eacute;e via cloud-init</h2><section class="chapter"><h3 id="un-fichier-cloud-init-pour-docker" data-toc="un-fichier-cloud-init-pour-docker">Un fichier cloud-init pour Docker</h3><p id="m8dnpt_50">L'installation manuelle est instructive, mais en pratique, vous voudrez automatiser ce processus. Voici un fichier cloud-init qui installe Docker automatiquement :</p><div class="code-block" data-lang="yaml">
+#cloud-config
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+
+runcmd:
+  # Ajouter la clé GPG Docker
+  - install -m 0755 -d /etc/apt/keyrings
+  - |
+    curl -fsSL \
+      https://download.docker.com/linux/ubuntu/gpg \
+      | gpg --dearmor \
+      -o /etc/apt/keyrings/docker.gpg
+  - chmod a+r /etc/apt/keyrings/docker.gpg
+
+  # Ajouter le dépôt Docker
+  - |
+    echo &quot;deb [arch=$(dpkg --print-architecture) \
+      signed-by=/etc/apt/keyrings/docker.gpg] \
+      https://download.docker.com/linux/ubuntu \
+      $(. /etc/os-release &amp;&amp; \
+      echo $VERSION_CODENAME) stable&quot; \
+      | tee /etc/apt/sources.list.d/docker.list \
+      &gt; /dev/null
+
+  # Installer Docker
+  - apt-get update
+  - |
+    apt-get install -y \
+      docker-ce docker-ce-cli \
+      containerd.io docker-compose-plugin
+
+  # Ajouter ubuntu au groupe docker
+  - usermod -aG docker ubuntu
+
+  # Démarrer Docker
+  - systemctl enable docker
+  - systemctl start docker
+</div><p id="m8dnpt_52">Sauvegardez ce fichier sous le nom <code class="code" id="m8dnpt_56">docker-cloud-init.yaml</code>, puis lancez une instance :</p><div class="code-block" data-lang="bash">
+multipass launch --name docker-auto \
+  --cpus 2 --memory 4G --disk 20G \
+  --cloud-init docker-cloud-init.yaml
+</div><p id="m8dnpt_54">Apr&egrave;s quelques minutes, Docker est install&eacute; et op&eacute;rationnel sans aucune intervention manuelle.</p><section class="chapter"><h4 id="exemple-cloudinit-docker" data-toc="exemple-cloudinit-docker">Exemple pratique</h4><p id="m8dnpt_57">V&eacute;rifiez que l'installation automatis&eacute;e a fonctionn&eacute; :</p><div class="code-block" data-lang="bash">
+# Attendre que cloud-init ait terminé
+multipass exec docker-auto -- \
+  cloud-init status --wait
+
+# Vérifier Docker
+multipass exec docker-auto -- docker version
+multipass exec docker-auto -- docker run hello-world
+</div></section></section></section><section class="chapter"><h2 id="image-docker-optimis-e-de-multipass" data-toc="image-docker-optimis-e-de-multipass">Image Docker optimis&eacute;e de Multipass</h2><section class="chapter"><h3 id="la-solution-la-plus-rapide" data-toc="la-solution-la-plus-rapide">La solution la plus rapide</h3><p id="m8dnpt_60">Multipass propose une image pr&eacute;construite qui inclut Docker et Docker Compose. C'est la m&eacute;thode la plus rapide pour obtenir un environnement Docker fonctionnel :</p><div class="code-block" data-lang="bash">
+# Lancer l'image Docker optimisée
+multipass launch docker --name docker-express
+</div><p id="m8dnpt_62">Cette image contient Docker et Portainer (une interface web de gestion Docker que nous verrons en d&eacute;tail dans le module suivant) pr&eacute;install&eacute;s et pr&eacute;configur&eacute;s.</p><section class="chapter"><h4 id="exemple-image-docker" data-toc="exemple-image-docker">Exemple pratique</h4><p id="m8dnpt_64">Comparons les trois m&eacute;thodes d'installation en termes de temps et de simplicit&eacute; :</p><div class="code-block" data-lang="bash">
+# Méthode 1 : Image optimisée (la plus rapide)
+time multipass launch docker --name m1-express
+
+# Méthode 2 : Cloud-init (automatisé mais plus long)
+time multipass launch --name m2-cloudinit \
+  --cloud-init docker-cloud-init.yaml
+
+# Méthode 3 : Manuelle (la plus longue)
+time multipass launch --name m3-manuelle
+# + installation manuelle ensuite
+</div><p id="m8dnpt_66">L'image optimis&eacute;e est g&eacute;n&eacute;ralement la plus rapide, car Docker est d&eacute;j&agrave; inclus dans l'image. Cloud-init est plus long, car il t&eacute;l&eacute;charge et installe Docker au premier d&eacute;marrage. L'installation manuelle est la plus longue, mais offre le plus de contr&ocirc;le.</p><div class="table-wrapper"><table class="wide" id="m8dnpt_67"><thead><tr class="ijRowHead" id="m8dnpt_68"><th id="m8dnpt_72"><p>M&eacute;thode</p></th><th id="m8dnpt_73"><p>Temps</p></th><th id="m8dnpt_74"><p>Personnalisation</p></th><th id="m8dnpt_75"><p>Simplicit&eacute;</p></th></tr></thead><tbody><tr id="m8dnpt_69"><td id="m8dnpt_76"><p>Image Docker</p></td><td id="m8dnpt_77"><p>~1 min</p></td><td id="m8dnpt_78"><p>Faible</p></td><td id="m8dnpt_79"><p>Maximale</p></td></tr><tr id="m8dnpt_70"><td id="m8dnpt_80"><p>Cloud-init</p></td><td id="m8dnpt_81"><p>~5 min</p></td><td id="m8dnpt_82"><p>&Eacute;lev&eacute;e</p></td><td id="m8dnpt_83"><p>Bonne</p></td></tr><tr id="m8dnpt_71"><td id="m8dnpt_84"><p>Manuelle</p></td><td id="m8dnpt_85"><p>~10 min</p></td><td id="m8dnpt_86"><p>Totale</p></td><td id="m8dnpt_87"><p>Moyenne</p></td></tr></tbody></table></div></section></section></section><section class="chapter"><h2 id="gestion-des-permissions-docker" data-toc="gestion-des-permissions-docker">Gestion des permissions Docker</h2><section class="chapter"><h3 id="le-groupe-docker" data-toc="le-groupe-docker">Le groupe <code class="code" id="m8dnpt_95">docker</code></h3><p id="m8dnpt_91">Par d&eacute;faut, seul l'utilisateur root peut ex&eacute;cuter des commandes Docker. Pour &eacute;viter de pr&eacute;fixer chaque commande par <code class="code" id="m8dnpt_96">sudo</code>, il faut ajouter l'utilisateur <code class="code" id="m8dnpt_97">ubuntu</code> au groupe <code class="code" id="m8dnpt_98">docker</code>:</p><div class="code-block" data-lang="bash">
+# Ajouter ubuntu au groupe docker
+sudo usermod -aG docker ubuntu
+
+# Appliquer le changement (nécessaire pour la session actuelle)
+newgrp docker
+
+# Vérifier que ça fonctionne sans sudo
+docker run hello-world
+</div><aside class="prompt" data-type="note" data-title="" id="m8dnpt_93"><p id="m8dnpt_99">Si vous avez utilis&eacute; le fichier cloud-init propos&eacute; plus haut, cette configuration est d&eacute;j&agrave; appliqu&eacute;e. L'image Docker optimis&eacute;e de Multipass inclut &eacute;galement cette configuration.</p></aside><section class="chapter"><h4 id="exemple-permissions-docker" data-toc="exemple-permissions-docker">Exemple pratique</h4><p id="m8dnpt_100">Voici comment v&eacute;rifier et corriger les permissions Docker :</p><div class="code-block" data-lang="bash">
+# Vérifier les groupes de l'utilisateur
+multipass exec docker-auto -- groups ubuntu
+
+# Le résultat doit contenir &quot;docker&quot;
+# Exemple : ubuntu adm sudo docker
+
+# Si &quot;docker&quot; n'apparaît pas, l'ajouter :
+multipass exec docker-auto -- \
+  sudo usermod -aG docker ubuntu
+
+# Tester sans sudo
+multipass exec docker-auto -- docker ps
+</div></section></section><section class="chapter"><h3 id="utiliser-docker-au-quotidien-dans-la-vm" data-toc="utiliser-docker-au-quotidien-dans-la-vm">Utiliser Docker au quotidien dans la VM</h3><p id="m8dnpt_102">Une fois les permissions configur&eacute;es, voici quelques commandes Docker courantes que vous utiliserez r&eacute;guli&egrave;rement dans votre VM :</p><div class="code-block" data-lang="bash">
+# Lancer un conteneur en arrière-plan
+multipass exec docker-auto -- \
+  docker run -d --name mon-nginx \
+  -p 8080:80 nginx
+
+# Vérifier les conteneurs en cours
+multipass exec docker-auto -- docker ps
+
+# Consulter les logs
+multipass exec docker-auto -- \
+  docker logs mon-nginx
+
+# Arrêter et supprimer
+multipass exec docker-auto -- \
+  docker stop mon-nginx
+multipass exec docker-auto -- \
+  docker rm mon-nginx
+
+# Nettoyer les images non utilisées
+multipass exec docker-auto -- docker system prune -f
+</div><p id="m8dnpt_104">Pour acc&eacute;der au serveur Nginx depuis votre machine h&ocirc;te, utilisez l'adresse IP de la VM :</p><div class="code-block" data-lang="bash">
+# Récupérer l'IP de la VM
+multipass info docker-auto | grep IPv4
+
+# Accéder au serveur web
+# (Remplacez IP_VM par l'adresse réelle)
+curl http://IP_VM:8080
+</div></section></section><section class="chapter"><h2 id="conclusion" data-toc="conclusion">Conclusion</h2><p id="m8dnpt_106">Ce module vous a montr&eacute; trois fa&ccedil;ons d'installer Docker dans une VM Multipass : manuellement, via cloud-init, et en utilisant l'image Docker optimis&eacute;e. Chaque m&eacute;thode a ses avantages selon le contexte. L'image optimis&eacute;e est id&eacute;ale pour d&eacute;marrer rapidement, cloud-init pour des configurations reproductibles et personnalis&eacute;es, et l'installation manuelle pour comprendre les rouages en profondeur.</p><p id="m8dnpt_107">Vous avez &eacute;galement appris &agrave; g&eacute;rer les permissions Docker pour travailler confortablement sans <code class="code" id="m8dnpt_108">sudo</code>. Ces comp&eacute;tences vous pr&eacute;parent au module suivant, o&ugrave; nous ajouterons Portainer pour g&eacute;rer Docker via une interface web intuitive.</p></section><div class="last-modified">18 avril 2026</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="module-07.html" class="navigation-links__prev">Module 7 -- Communication r&eacute;seau entre les VM</a><a href="module-09.html" class="navigation-links__next">Module 9 -- Multipass, Docker et Portainer</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.25.3-b857/app.js"></script></body></html>
